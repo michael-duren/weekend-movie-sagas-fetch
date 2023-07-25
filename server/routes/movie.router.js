@@ -24,7 +24,7 @@ router.get("/:id", async (req, res) => {
      */
     const movieQuery = `SELECT * FROM movies WHERE id=$1`;
     const movieResult = await pool.query(movieQuery, [id]);
-    const movie = await movieResult.rows;
+    const movie = await movieResult.rows[0];
 
     /*
      * Get Genres associated with movie

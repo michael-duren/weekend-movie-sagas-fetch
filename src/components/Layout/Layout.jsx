@@ -8,7 +8,7 @@ export default function Layout({ children }) {
           <h1 className="text-6xl font-bebas text-red-600">Movie Sagas</h1>
         </Link>
       </header>
-      <div>{children}</div>
+      <div className="flex-1 h-full">{children}</div>
     </div>
   );
 }

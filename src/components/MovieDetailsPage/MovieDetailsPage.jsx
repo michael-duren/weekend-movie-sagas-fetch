@@ -8,7 +8,7 @@ export default function MovieDetailsPage() {
   const { id } = useParams();
   const history = useHistory();
   const toEditPage = () => {
-    history.push("/");
+    history.push(`/edit/${id}`);
   };
 
   useEffect(() => {

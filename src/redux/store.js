@@ -76,9 +76,26 @@ function* fetchMovieDetails(action) {
   }
 }
 
+function* editMovie(action) {
+  try {
+    yield fetch(`/api/movie/${action.payload.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(action.payload),
+    });
+    yield put({ type: "FETCH_MOVIES" });
+  } catch (e) {
+    console.log("get all error");
+    alert("Something went wrong.");
+  }
+}
+
 function* watcherSaga() {
   yield takeEvery("FETCH_MOVIES", fetchAllMovies);
   yield takeEvery("FETCH_MOVIE_DETAILS", fetchMovieDetails);
+  yield takeEvery("EDIT_MOVIE", editMovie);
 }
 
 sagaMiddleware.run(watcherSaga);

@@ -91,4 +91,21 @@ router.post("/", (req, res) => {
     });
 });
 
+router.put("/:id", (req, res) => {
+  const movieId = req.params.id;
+  const updatedMovie = req.body;
+
+  const queryText = `UPDATE movies SET "title" = $1, "description" = $2 WHERE id = $3;`;
+
+  pool
+    .query(queryText, [updatedMovie.title, updatedMovie.description, movieId])
+    .then((response) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("Error updating movie", err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;

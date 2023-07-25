@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -6,6 +6,10 @@ export default function MovieDetailsPage() {
   const dispatch = useDispatch();
   const { movie, genres } = useSelector((state) => state.movieDetails);
   const { id } = useParams();
+  const history = useHistory();
+  const toEditPage = () => {
+    history.push("/");
+  };
 
   useEffect(() => {
     dispatch({ type: "FETCH_MOVIE_DETAILS", payload: id });
@@ -28,6 +32,17 @@ export default function MovieDetailsPage() {
               <h2 className="text-7xl max-w-[20rem] mb-8 font-bebas">
                 {movie.title}
               </h2>
+              <div className="flex justify-between mb-8">
+                <button className="bg-green-400 text-sm px-3 py-2 hover:bg-opacity-75 rounded-xl bg-opacity-30">
+                  Watch
+                </button>
+                <button
+                  onClick={toEditPage}
+                  className="bg-orange-400 text-sm px-3 py-2 hover:bg-opacity-75 rounded-xl bg-opacity-30"
+                >
+                  Edit
+                </button>
+              </div>
               <div className="max-w-[20rem]">
                 <p>{movie.description}</p>
               </div>

@@ -1,9 +1,10 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function MovieEditPage() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { id } = useParams();
   const { movie } = useSelector((store) => store.movieDetails);
   const [title, setTitle] = useState("");
@@ -20,8 +21,10 @@ export default function MovieEditPage() {
     }
   }, [movie]);
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     dispatch({ type: "EDIT_MOVIE", payload: { ...movie, title, description } });
+    history.push(`/details/${id}`);
   };
 
   return (
@@ -55,10 +58,21 @@ export default function MovieEditPage() {
                 onChange={(e) => setDescription(e.target.value)}
               />
             </div>
-            <div>
-              <button className="px-3 w-24 rounded-xl active:scale-105 transform transition-all text-sm duration-300 py-2 bg-green-600 bg-opacity-40 hover:bg-opacity-100">
+            <div className="flex justify-between">
+              <button
+                type="submit"
+                className="px-3 w-24 rounded-xl active:scale-105 transform transition-all text-sm duration-300 py-2 bg-green-600 bg-opacity-40 hover:bg-opacity-100"
+              >
                 Submit
               </button>
+              <Link to={`/details/${id}`}>
+                <button
+                  type="button"
+                  className="px-3 w-24 rounded-xl active:scale-105 transform transition-all text-sm duration-300 py-2 bg-red-600 bg-opacity-40 hover:bg-opacity-100"
+                >
+                  Cancel
+                </button>
+              </Link>
             </div>
           </form>
         </main>

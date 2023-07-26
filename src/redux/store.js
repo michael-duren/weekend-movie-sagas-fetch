@@ -60,6 +60,21 @@ function* fetchAllMovies() {
   }
 }
 
+function* fetchAllGenres() {
+  // get all movies from the DB
+  try {
+    const response = yield fetch("/api/genre");
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    }
+    const genres = yield response.json();
+    yield put({ type: "SET_GENRES", payload: genres });
+  } catch {
+    console.log("get all error");
+    alert("Something went wrong.");
+  }
+}
+
 function* fetchMovieDetails(action) {
   // get single movie from db and associated genres
   try {
@@ -71,6 +86,22 @@ function* fetchMovieDetails(action) {
     console.log("IN FETCH MOVIE DETAILS", movie);
     yield put({ type: "SET_MOVIE_DETAILS", payload: movie });
   } catch {
+    console.log("get all error");
+    alert("Something went wrong.");
+  }
+}
+
+function* createMovie(action) {
+  try {
+    yield fetch(`/api/movie`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(action.payload),
+    });
+    yield put({ type: "FETCH_MOVIES" });
+  } catch (e) {
     console.log("get all error");
     alert("Something went wrong.");
   }
@@ -95,7 +126,9 @@ function* editMovie(action) {
 function* watcherSaga() {
   yield takeEvery("FETCH_MOVIES", fetchAllMovies);
   yield takeEvery("FETCH_MOVIE_DETAILS", fetchMovieDetails);
+  yield takeEvery("CREATE_MOVIE", createMovie);
   yield takeEvery("EDIT_MOVIE", editMovie);
+  yield takeEvery("FETCH_GENRES", fetchAllGenres);
 }
 
 sagaMiddleware.run(watcherSaga);

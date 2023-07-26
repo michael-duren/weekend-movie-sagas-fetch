@@ -17,7 +17,7 @@ function MovieList() {
         <h2>Movie List</h2>
         <Link
           to={"/create-movie"}
-          className="text-green-600 hover:text-green-800"
+          className="text-green-600 hover:text-green-500"
         >
           Add Movie
         </Link>

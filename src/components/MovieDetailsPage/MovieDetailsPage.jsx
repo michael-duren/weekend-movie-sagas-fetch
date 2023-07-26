@@ -56,7 +56,7 @@ export default function MovieDetailsPage() {
                   const { genre } = genreName;
                   return (
                     <div
-                      className="px-3 cursor-pointer hover:scale-105 font-semibold uppercase text-sm rounded-xl py-2 bg-red-600 bg-opacity-40"
+                      className="shadow-md shadow-red-600  px-3 cursor-pointer hover:scale-105 font-semibold uppercase text-sm rounded-xl py-2 bg-red-600 bg-opacity-40"
                       key={genre}
                     >
                       {genre}

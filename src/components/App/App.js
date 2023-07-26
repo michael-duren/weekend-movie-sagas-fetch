@@ -3,6 +3,7 @@ import MovieList from "../MovieList/MovieList";
 import Layout from "../Layout/Layout";
 import MovieDetailsPage from "../MovieDetailsPage/MovieDetailsPage";
 import MovieEditPage from "../MovieEditPage/MovieEditPage";
+import CreateMoviePage from "../CreateMovie/CreateMoviePage";
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
         </Route>
 
         {/* Add Movie page */}
+        <Route path="/create-movie">
+          <CreateMoviePage />
+        </Route>
       </Layout>
     </Router>
   );

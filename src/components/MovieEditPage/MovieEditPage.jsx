@@ -37,7 +37,8 @@ export default function MovieEditPage() {
       {!movie ? (
         <p className="animate-pulse text-center mt-16">Loading Movie...</p>
       ) : (
-        <main className="flex items-center justify-center mt-16">
+        <main className="flex  items-center justify-evenly mt-16">
+          {/* FORM */}
           <form className="flex flex-col gap-8" onSubmit={onSubmit}>
             <div className="flex flex-col gap-4">
               <label htmlFor="title">Title</label>
@@ -75,6 +76,17 @@ export default function MovieEditPage() {
               </Link>
             </div>
           </form>
+          {/*  PREVIEW */}
+          <div>
+            <div className="min-w-[20rem]">
+              <h2 className="text-7xl max-w-[20rem] mb-8 font-bebas">
+                {title}
+              </h2>
+              <div className="max-w-[20rem]">
+                <p>{description}</p>
+              </div>
+            </div>
+          </div>
         </main>
       )}
     </div>

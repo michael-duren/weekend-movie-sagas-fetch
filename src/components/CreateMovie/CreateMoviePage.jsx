@@ -20,8 +20,8 @@ export default function CreateMoviePage() {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch({
-      type: "ADD_MOVIE",
-      payload: { title, description, imageURL, genres: genreArr },
+      type: "CREATE_MOVIE",
+      payload: { title, description, poster: imageURL, genres: genreArr },
     });
     history.push(`/`);
   };
@@ -120,7 +120,7 @@ export default function CreateMoviePage() {
               {imageURL && (
                 <img
                   src={imageURL}
-                  className="max-w-[20rem]"
+                  className="max-w-[20rem] rounded-xl"
                   alt="Movie Poster Goes Here"
                 />
               )}

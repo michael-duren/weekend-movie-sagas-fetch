@@ -65,23 +65,24 @@ router.post("/", (req, res) => {
 
       const createdMovieId = result.rows[0].id;
 
-      // Now handle the genre reference
-      const insertMovieGenreQuery = `
+      // Loop through each genre in the array making a
+      // joining table for the new movie and genre
+      for (let i = 0; i < req.body.genres.length; i++) {
+        const insertMovieGenreQuery = `
       INSERT INTO "movies_genres" ("movie_id", "genre_id")
       VALUES  ($1, $2);
       `;
-      // SECOND QUERY ADDS GENRE FOR THAT NEW MOVIE
-      pool
-        .query(insertMovieGenreQuery, [createdMovieId, req.body.genre_id])
-        .then((result) => {
-          //Now that both are done, send back success!
-          res.sendStatus(201);
-        })
-        .catch((err) => {
-          // catch for second query
-          console.log(err);
-          res.sendStatus(500);
-        });
+        // SECOND QUERY ADDS GENRE FOR THAT NEW MOVIE
+        pool
+          .query(insertMovieGenreQuery, [createdMovieId, req.body.genres[i]])
+          .then()
+          .catch((err) => {
+            // catch for second query
+            console.log(err);
+            res.sendStatus(500);
+          });
+      }
+      // Now handle the genre reference
 
       // Catch for first query
     })
